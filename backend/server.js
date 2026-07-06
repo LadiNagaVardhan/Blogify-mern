@@ -17,15 +17,27 @@ const app = express();
 
 // Middlewares
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://blogify-rose-iota.vercel.app",
+  "https://blogify-gcajsn4qn-college-projects2.vercel.app",
+];
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://blogify-rose-iota.vercel.app",
-    "https://blogify-gcajsn4qn-college-projects2.vercel.app"
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (Postman, mobile apps, etc.)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
 }));
+
+app.options("*", cors());
 app.use(express.json());
 
 // Base Route
