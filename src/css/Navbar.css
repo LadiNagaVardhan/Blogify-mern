@@ -1,0 +1,243 @@
+.navbar {
+  height: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  transition: var(--transition);
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-md);
+  border-bottom-color: transparent;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 8px 4px;
+  position: relative;
+}
+
+.nav-links::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: var(--transition);
+}
+
+.nav-links:hover {
+  color: var(--primary);
+}
+
+.nav-links:hover::after {
+  width: 100%;
+}
+
+.nav-links.active-link {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.nav-links.active-link::after {
+  width: 100%;
+}
+
+/* Button style for Login */
+.nav-links-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-links-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-links-btn.active-btn {
+  background-color: var(--secondary);
+}
+
+/* Mobile Hamburger Menu */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger-bar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: left center;
+}
+
+/* Responsive Media Queries */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--bg-card);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 40px 40px;
+    gap: 24px;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    right: 0;
+    transform: translateX(0);
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-links {
+    display: block;
+    font-size: 1.1rem;
+    padding: 12px 0;
+    width: 100%;
+  }
+
+  .nav-links::after {
+    display: none;
+  }
+
+  .nav-links.active-link {
+    border-left: 3px solid var(--primary);
+    padding-left: 12px;
+  }
+
+  .nav-btn {
+    margin-top: 12px;
+    width: 100%;
+  }
+
+  .nav-links-btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+  }
+
+  /* Hamburger Animations when menu is Open */
+  .menu-toggle.open .hamburger-bar:nth-child(1) {
+    transform: rotate(45deg) translateY(-2px);
+  }
+
+  .menu-toggle.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+    width: 0;
+  }
+
+  .menu-toggle.open .hamburger-bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(2px);
+  }
+
+  /* Overlay styling */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.4);
+    z-index: 999;
+  }
+}
+
+/* Profile and Avatar styles */
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-avatar-container {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1.5px solid var(--primary);
+  flex-shrink: 0;
+}
+
+.navbar-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navbar-avatar-fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
