@@ -16,7 +16,16 @@ connectDB();
 const app = express();
 
 // Middlewares
-app.use(cors());
+
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://blogify-rose-iota.vercel.app",
+    "https://blogify-gcajsn4qn-college-projects2.vercel.app"
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 // Base Route
